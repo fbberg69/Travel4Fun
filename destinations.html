@@ -1,0 +1,419 @@
+<script type="text/javascript">
+        var gk_isXlsx = false;
+        var gk_xlsxFileLookup = {};
+        var gk_fileData = {};
+        function filledCell(cell) {
+          return cell !== '' && cell != null;
+        }
+        function loadFileData(filename) {
+        if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
+            try {
+                var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
+                var firstSheetName = workbook.SheetNames[0];
+                var worksheet = workbook.Sheets[firstSheetName];
+
+                // Convert sheet to JSON to filter blank rows
+                var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
+                // Filter out blank rows (rows where all cells are empty, null, or undefined)
+                var filteredData = jsonData.filter(row => row.some(filledCell));
+
+                // Heuristic to find the header row by ignoring rows with fewer filled cells than the next row
+                var headerRowIndex = filteredData.findIndex((row, index) =>
+                  row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
+                );
+                // Fallback
+                if (headerRowIndex === -1 || headerRowIndex > 25) {
+                  headerRowIndex = 0;
+                }
+
+                // Convert filtered JSON back to CSV
+                var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex)); // Create a new sheet from filtered array of arrays
+                csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
+                return csv;
+            } catch (e) {
+                console.error(e);
+                return "";
+            }
+        }
+        return gk_fileData[filename] || "";
+        }
+        </script><!DOCTYPE html>
+
+<html lang="en">
+<head>
+<!-- Open Graph -->
+<meta content="Travel4Fun4U - Your Ultimate Travel Guide" property="og:title"/>
+<meta content="Explore top destinations, affiliate tips, and travel hacks!" property="og:description"/>
+<meta content="https://teusite.com/imagem.jpg" property="og:image"/>
+<meta content="https://teusite.com" property="og:url"/>
+<meta content="website" property="og:type"/>
+<!-- Twitter Cards -->
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="Travel4Fun4U - Your Ultimate Travel Guide" name="twitter:title"/>
+<meta content="Explore top destinations, affiliate tips, and travel hacks!" name="twitter:description"/>
+<meta content="https://teusite.com/imagem.jpg" name="twitter:image"/>
+<style> html { scroll-behavior: smooth; } </style>
+<!-- SEO Meta Tags -->
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="travel, tourism, itineraries, travel guide, destinations" name="keywords"/>
+<meta content="Travel4Fun4U" name="author"/>
+<meta content="index, follow" name="robots"/>
+<link href="https://teusite.com/nome-da-pagina.html" rel="canonical"/>
+<!-- Performance & SEO Técnico -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com" rel="dns-prefetch"/>
+<meta content="IE=edge" http-equiv="X-UA-Compatible"/>
+<meta content="#ffffff" name="theme-color"/>
+<meta content="Discover the best travel itineraries with tips and links to book unforgettable experiences." name="description"/>
+<!-- SEO Meta Tags -->
+
+
+
+
+
+
+<!-- Performance & SEO Técnico -->
+
+
+
+
+
+
+
+<meta content="Explore top travel destinations for 2025 with Travel4Fun's comprehensive guides and affiliate deals." name="description"/>
+<meta content="travel destinations, travel guides, affiliate deals, Travel4Fun" name="keywords"/>
+<meta content="Travel4Fun" name="author"/>
+<meta content="Travel4Fun – Explore Top Destinations" property="og:title"/>
+<meta content="Discover the world’s most amazing places with Travel4Fun’s curated travel guides and deals." property="og:description"/>
+<meta content="/assets/images/destinations-hero.jpg" property="og:image"/>
+<meta content="https://tubular-shortbread-d92300.netlify.app/destinations.html" property="og:url"/>
+
+<link href="https://tubular-shortbread-d92300.netlify.app/destinations.html" rel="canonical"/>
+<title>Travel4Fun – Explore Top Destinations</title>
+<link crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQov1cwx4OnYxTxve5UMg5GT6L4JJg==" referrerpolicy="no-referrer" rel="stylesheet"/>
+<link href="/style.min.css" rel="stylesheet"/>
+<link href="/assets/favicon/favicon.ico" rel="icon" type="image/x-icon"/>
+<script async="" crossorigin="anonymous" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9106842518042265"></script>
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-VPB2FSQ7S2"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-VPB2FSQ7S2');
+  </script>
+<script defer="" src="/assets/js/cookieconsent.min.js"></script>
+<script defer="" src="/main.min.js"></script>
+</head>
+<body>
+<header>
+<!-- Open Graph -->
+</header>
+<main id="main-content">
+<section class="hero container py-12 text-center">
+<h1 class="text-4xl md:text-5xl font-bold mb-4">Explore Top Destinations</h1>
+<ins aria-hidden="true" class="adsbygoogle" data-ad-client="ca-pub-9106842518042265" data-ad-format="autorelaxed" data-ad-slot="7506524692" style="display:block"></ins>
+<script>
+           (adsbygoogle = window.adsbygoogle || []).push({});
+      </script>
+<p class="text-lg md:text-xl mb-6">Discover the world’s most amazing places with our comprehensive guides</p>
+</section>
+<section class="container py-12">
+<h2 class="text-3xl font-bold mb-8">Featured Destinations</h2>
+<div class="flex space-x-4 mb-6">
+<button aria-label="Show all destinations" class="btn">All Regions</button>
+<button aria-label="Show Europe destinations" class="btn">Europe</button>
+<button aria-label="Show Asia destinations" class="btn">Asia</button>
+<button aria-label="Show Americas destinations" class="btn">Americas</button>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+<div class="card" id="italy">
+<img alt="Venice canals in Italy" src="/assets/images/italy.jpg"/>
+<div class="p-4">
+<h3>Italy</h3>
+<p>From Rome’s ancient ruins to Venice’s canals and Tuscany’s vineyards, Italy is a feast for the senses.</p>
+<div class="flex flex-wrap gap-2 mt-4">
+<a aria-label="Book hotels in Italy" class="underline hover:text-accent" href="https://trip.tp.st/u9rynlyL" onclick="trackAffiliateClick('Trip.com')">Book hotels</a> |
+              <a aria-label="Rent a car in Italy" class="underline hover:text-accent" href="https://localrent.tp.st/tBbjydi3" onclick="trackAffiliateClick('Localrent')">Rent a car</a> |
+              <a aria-label="Book tours in Italy" class="underline hover:text-accent" href="https://wegotrip.tp.st/8Fiplbc2" onclick="trackAffiliateClick('WeGoTrip')">Book tours</a> |
+              <a aria-label="Get eSIM for Italy" class="underline hover:text-accent" href="https://airalo.tp.st/WPsFTtzQ" onclick="trackAffiliateClick('Airalo')">eSIM for Italy</a>
+</div>
+<ul class="mt-4 list-disc pl-5">
+<li><a aria-label="Best time to visit Italy" class="hover:text-accent" href="https://medium.com/@jcbergxuxu/how-to-road-trip-through-italy-without-the-crowds-car-rentals-vineyards-secret-villages-aa8ba2f975a8">Best Time to Visit Italy</a></li>
+<li><a aria-label="Rome itinerary" class="hover:text-accent" href="https://wegotrip.tp.st/F3mozSTz">Rome Itinerary</a></li>
+<li><a aria-label="Tuscany food tour" class="hover:text-accent" href="https://wegotrip.tp.st/Eruf15tr">Tuscany Food Tour</a></li>
+</ul>
+</div>
+</div>
+<div class="card" id="japan">
+<img alt="Cherry blossoms in Japan" src="/assets/images/japan.jpg"/>
+<div class="p-4">
+<h3>Japan</h3>
+<p>Experience the blend of tradition and innovation, from cherry blossoms in Kyoto to neon Tokyo.</p>
+<div class="flex flex-wrap gap-2 mt-4">
+<a aria-label="Book hotels in Japan" class="underline hover:text-accent" href="https://trip.tp.st/u9rynlyL" onclick="trackAffiliateClick('Trip.com')">Book hotels</a> |
+              <a aria-label="Book transfers in Japan" class="underline hover:text-accent" href="https://kiwitaxi.tp.st/taiuAv3L" onclick="trackAffiliateClick('KiwiTaxi')">Book transfers</a> |
+              <a aria-label="Book tours in Japan" class="underline hover:text-accent" href="https://wegotrip.tp.st/8Fiplbc2" onclick="trackAffiliateClick('WeGoTrip')">Book tours</a> |
+              <a aria-label="Get eSIM for Japan" class="underline hover:text-accent" href="https://airalo.tp.st/WPsFTtzQ" onclick="trackAffiliateClick('Airalo')">eSIM for Japan</a>
+</div>
+<ul class="mt-4 list-disc pl-5">
+<li><a aria-label="Kyoto cherry blossoms guide" class="hover:text-accent" href="https://wegotrip.tp.st/Z19iAQcb">Kyoto Cherry Blossoms</a></li>
+<li><a aria-label="Tokyo city guide" class="hover:text-accent" href="https://medium.com/@jcbergxuxu/japan-explorer-master-the-art-of-affiliate-marketing-in-the-land-of-the-rising-sun-b99b5e21615c">Tokyo City Guide</a></li>
+<li><a aria-label="Japanese culture guide" class="hover:text-accent" href="https://tiqets.tp.st/ldqDO7pj">Japanese Culture</a></li>
+</ul>
+</div>
+</div>
+<div class="card" id="brazil">
+<img alt="Carnival in Brazil" src="/assets/images/brazil.jpg"/>
+<div class="p-4">
+<h3>Brazil</h3>
+<p>Dance at Rio Carnival, explore the Amazon, or relax on Copacabana Beach – Brazil has it all.</p>
+<div class="flex flex-wrap gap-2 mt-4">
+<a aria-label="Book hotels in Brazil" class="underline hover:text-accent" href="https://trip.tp.st/u9rynlyL" onclick="trackAffiliateClick('Trip.com')">Book hotels</a> |
+              <a aria-label="Book transfers in Brazil" class="underline hover:text-accent" href="https://kiwitaxi.tp.st/taiuAv3L" onclick="trackAffiliateClick('KiwiTaxi')">Book transfers</a> |
+              <a aria-label="Book tours in Brazil" class="underline hover:text-accent" href="https://wegotrip.tp.st/8Fiplbc2" onclick="trackAffiliateClick('WeGoTrip')">Book tours</a> |
+              <a aria-label="Get eSIM for Brazil" class="underline hover:text-accent" href="https://airalo.tp.st/WPsFTtzQ" onclick="trackAffiliateClick('Airalo')">eSIM for Brazil</a>
+</div>
+<ul class="mt-4 list-disc pl-5">
+<li><a aria-label="Rio Carnival guide" class="hover:text-accent" href="https://medium.com/@jcbergxuxu/brazil-the-ultimate-travel-affiliate-marketing-guide-b17313af2418">Rio Carnival Guide</a></li>
+<li><a aria-label="Amazon adventure guide" class="hover:text-accent" href="https://wayaway.tp.st/vFBZ52mY">Amazon Adventure</a></li>
+<li><a aria-label="Copacabana Beach tips" class="hover:text-accent" href="https://tiqets.tp.st/ufhxk1TW">Copacabana Beach Tips</a></li>
+</ul>
+</div>
+</div>
+<div class="card" id="iceland">
+<img alt="Northern lights in Iceland" src="/assets/images/iceland.jpg"/>
+<div class="p-4">
+<h3>Iceland</h3>
+<p>Land of waterfalls, glaciers, and the Northern Lights. Iceland is an adventurer’s dream.</p>
+<div class="flex flex-wrap gap-2 mt-4">
+<a aria-label="Book hotels in Iceland" class="underline hover:text-accent" href="https://trip.tp.st/u9rynlyL" onclick="trackAffiliateClick('Trip.com')">Book hotels</a> |
+              <a aria-label="Rent a car in Iceland" class="underline hover:text-accent" href="https://localrent.tp.st/tBbjydi3" onclick="trackAffiliateClick('Localrent')">Rent a car</a> |
+              <a aria-label="Book tours in Iceland" class="underline hover:text-accent" href="https://wegotrip.tp.st/8Fiplbc2" onclick="trackAffiliateClick('WeGoTrip')">Book tours</a> |
+              <a aria-label="Get eSIM for Iceland" class="underline hover:text-accent" href="https://airalo.tp.st/WPsFTtzQ" onclick="trackAffiliateClick('Airalo')">eSIM for Iceland</a>
+</div>
+<ul class="mt-4 list-disc pl-5">
+<li><a aria-label="Northern lights guide" class="hover:text-accent" href="https://medium.com/@jcbergxuxu/essential-safety-tips-for-solo-female-travelers-chase-northern-lights-and-glaciers-with-localrent-8ab239f956b0">Northern Lights Guide</a></li>
+<li><a aria-label="Iceland waterfalls guide" class="hover:text-accent" href="https://tiqets.tp.st/b2z9Onxz">Iceland Waterfalls</a></li>
+<li><a aria-label="Glacier hiking guide" class="hover:text-accent" href="https://tiqets.tp.st/zKC9UQpu">Glacier Hiking</a></li>
+</ul>
+</div>
+</div>
+<div class="card" id="thailand">
+<img alt="Beaches in Thailand" src="/assets/images/thailand.jpg"/>
+<div class="p-4">
+<h3>Thailand</h3>
+<p>From Bangkok’s energy to Phuket’s beaches, Thailand is a paradise for foodies and adventurers.</p>
+<div class="flex flex-wrap gap-2 mt-4">
+<a aria-label="Book hotels in Thailand" class="underline hover:text-accent" href="https://trip.tp.st/u9rynlyL" onclick="trackAffiliateClick('Trip.com')">Book hotels</a> |
+              <a aria-label="Book transfers in Thailand" class="underline hover:text-accent" href="https://kiwitaxi.tp.st/taiuAv3L" onclick="trackAffiliateClick('KiwiTaxi')">Book transfers</a> |
+              <a aria-label="Book tours in Thailand" class="underline hover:text-accent" href="https://wegotrip.tp.st/8Fiplbc2" onclick="trackAffiliateClick('WeGoTrip')">Book tours</a> |
+              <a aria-label="Get eSIM for Thailand" class="underline hover:text-accent" href="https://airalo.tp.st/WPsFTtzQ" onclick="trackAffiliateClick('Airalo')">eSIM for Thailand</a>
+</div>
+<ul class="mt-4 list-disc pl-5">
+<li><a aria-label="Bangkok city guide" class="hover:text-accent" href="https://medium.com/@jcbergxuxu/exploring-thailand-while-building-your-affiliate-empire-the-ultimate-work-play-guide-56c012549d39">Bangkok City Guide</a></li>
+<li><a aria-label="Phuket beaches guide" class="hover:text-accent" href="https://tiqets.tp.st/3OucrcQi">Phuket Beaches</a></li>
+<li><a aria-label="Thai food tour guide" class="hover:text-accent" href="https://tiqets.tp.st/GtlxXNo1">Thai Food Tour</a></li>
+</ul>
+</div>
+</div>
+<div class="card" id="spain">
+<img alt="Flamenco in Spain" src="/assets/images/spain.jpg"/>
+<div class="p-4">
+<h3>Spain</h3>
+<p>Tapas, flamenco, and world-class beaches. Spain is vibrant, diverse, and full of life.</p>
+<div class="flex flex-wrap gap-2 mt-4">
+<a aria-label="Book hotels in Spain" class="underline hover:text-accent" href="https://trip.tp.st/u9rynlyL" onclick="trackAffiliateClick('Trip.com')">Book hotels</a> |
+              <a aria-label="Rent a car in Spain" class="underline hover:text-accent" href="https://localrent.tp.st/tBbjydi3" onclick="trackAffiliateClick('Localrent')">Rent a car</a> |
+              <a aria-label="Book tours in Spain" class="underline hover:text-accent" href="https://wegotrip.tp.st/8Fiplbc2" onclick="trackAffiliateClick('WeGoTrip')">Book tours</a> |
+              <a aria-label="Get eSIM for Spain" class="underline hover:text-accent" href="https://airalo.tp.st/WPsFTtzQ" onclick="trackAffiliateClick('Airalo')">eSIM for Spain</a>
+</div>
+<ul class="mt-4 list-disc pl-5">
+<li><a aria-label="Barcelona guide" class="hover:text-accent" href="https://medium.com/@jcbergxuxu/trip-to-spain-affiliate-marketing-the-ultimate-guide-c6b599cd8f34">Barcelona Guide</a></li>
+<li><a aria-label="Flamenco in Spain guide" class="hover:text-accent" href="https://medium.com/@jcbergxuxu/smart-tools-for-digital-nomads-in-2025-744d22679e67">Flamenco in Spain</a></li>
+<li><a aria-label="Spanish tapas tour guide" class="hover:text-accent" href="https://tiqets.tp.st/TUKgHOZy">Spanish Tapas Tour</a></li>
+</ul>
+</div>
+</div>
+</div>
+<div class="hidden text-center mt-6" id="no-results">No destinations found for this filter.</div>
+<div class="text-center mt-8">
+<button aria-label="Load more destinations" class="cta">Load More Destinations</button>
+</div>
+</section>
+<section class="container py-12">
+<h2 class="text-3xl font-bold mb-4 text-center">Video Guide: Top 5 Things to Do in Lisbon</h2>
+<div class="relative" style="padding-bottom: 56.25%;">
+<iframe allowfullscreen="" class="absolute top-0 left-0 w-full h-full" frameborder="0" src="https://www.youtube.com/embed/M7lc1UVf-VE" title="Lisbon Travel Guide Video"></iframe>
+</div>
+<p class="mt-4 text-center">Watch our curated guide to Lisbon’s must-see attractions, from Belém Tower to Alfama’s historic streets. <a aria-label="Read Lisbon travel guide" class="underline hover:text-accent" href="https://medium.com/@jcbergxuxu/top-5-things-to-do-in-lisbon-in-2025-without-going-broke-or-boring-9eab335380bb">Read our full Lisbon guide</a> or dive into our <a aria-label="Read Lisbon article on Medium" class="underline hover:text-accent" href="https://medium.com/@jcbergxuxu/">detailed article on Medium</a>.</p>
+<div class="text-center mt-4">
+<a aria-label="Book hotels in Lisbon" class="cta" href="https://trip.tp.st/u9rynlyL" onclick="trackAffiliateClick('Trip.com')">Book hotels in Lisbon</a>
+</div>
+</section>
+<section class="container py-12 text-center">
+<h2 class="text-3xl font-bold mb-4">Get Weekly Travel Tips &amp; Deals</h2>
+<p class="mb-6">Join 12,000+ travelers who get our exclusive affiliate discounts and curated guides.</p>
+<form class="max-w-lg mx-auto" data-netlify="true" name="newsletter">
+<input name="form-name" type="hidden" value="newsletter"/>
+<input aria-label="Email for newsletter subscription" class="border rounded p-2 w-full mb-4 focus:outline-none focus:ring-2 focus:ring-accent" name="email" placeholder="Your best email" required="" type="email"/>
+<button aria-label="Subscribe to newsletter" class="cta" type="submit">Subscribe</button>
+</form>
+<p class="mt-2 text-sm">We respect your privacy. Unsubscribe at any time.</p>
+<div class="hidden mt-4 text-green-600" id="newsletter-success" role="alert">Thanks for subscribing!</div>
+<div class="hidden mt-4 text-red-600" id="newsletter-error" role="alert">Please enter a valid email.</div>
+</section>
+</main>
+<footer class="bg-dark text-light">
+<div class="container grid grid-cols-1 md:grid-cols-4 gap-8 py-12">
+<div>
+<h3 class="text-xl font-bold mb-4 flex items-center">Travel4Fun</h3>
+<p class="mb-4">Curated travel resources and affiliate deals to make your adventures unforgettable.</p>
+<div class="flex space-x-4">
+<a aria-label="Visit Travel4Fun on Pinterest" class="hover:text-accent" href="https://pt.pinterest.com/Travel4Fun4U/" onclick="trackAffiliateClick('Pinterest')"><i class="fab fa-pinterest text-xl"></i></a>
+<a aria-label="Visit Travel4Fun on X" class="hover:text-accent" href="https://x.com/DoidaoDuda" onclick="trackAffiliateClick('X')"><i class="fab fa-x text-xl"></i></a>
+<a aria-label="Visit Travel4Fun on LinkedIn" class="hover:text-accent" href="https://www.linkedin.com/in/jc-berg-2b355035a/" onclick="trackAffiliateClick('LinkedIn')"><i class="fab fa-linkedin text-xl"></i></a>
+<a aria-label="Visit Travel4Fun on Facebook" class="hover:text-accent" href="https://www.facebook.com/profile.php?id=100093612698647&amp;locale=pt_PT" onclick="trackAffiliateClick('Facebook')"><i class="fab fa-facebook text-xl"></i></a>
+<a aria-label="Support Travel4Fun on Ko-fi" class="hover:text-accent" href="https://ko-fi.com/travel4fun4u" onclick="trackAffiliateClick('Ko-fi')"><i class="fab fa-ko-fi text-xl"></i></a>
+</div>
+</div>
+<div>
+<h3 class="text-xl font-bold mb-4">Quick Links</h3>
+<ul class="space-y-2">
+<li><a aria-label="Home" class="hover:text-accent" href="/">Home</a></li>
+<li><a aria-label="Destinations" class="hover:text-accent" href="/destinations.html">Destinations</a></li>
+<li><a aria-label="Resources" class="hover:text-accent" href="/resources.html">Resources</a></li>
+<li><a aria-label="Blog" class="hover:text-accent" href="/blog.html">Blog</a></li>
+<li><a aria-label="About" class="hover:text-accent" href="/about.html">About</a></li>
+<li><a aria-label="Contact" class="hover:text-accent" href="/contact.html">Contact</a></li>
+</ul>
+</div>
+<div>
+<h3 class="text-xl font-bold mb-4">Affiliate Partners</h3>
+<ul class="space-y-2">
+<li><a aria-label="Book with Trip.com" class="hover:text-accent" href="https://trip.tp.st/u9rynlyL" onclick="trackAffiliateClick('Trip.com')">Trip.com</a></li>
+<li><a aria-label="Book with WeGoTrip" class="hover:text-accent" href="https://wegotrip.tp.st/8Fiplbc2" onclick="trackAffiliateClick('WeGoTrip')">WeGoTrip</a></li>
+<li><a aria-label="Book with Localrent" class="hover:text-accent" href="https://localrent.tp.st/tBbjydi3" onclick="trackAffiliateClick('Localrent')">Localrent</a></li>
+<li><a aria-label="Book with Airalo" class="hover:text-accent" href="https://airalo.tp.st/WPsFTtzQ" onclick="trackAffiliateClick('Airalo')">Airalo</a></li>
+<li><a aria-label="Book with KiwiTaxi" class="hover:text-accent" href="https://kiwitaxi.tp.st/taiuAv3L" onclick="trackAffiliateClick('KiwiTaxi')">KiwiTaxi</a></li>
+<li><a aria-label="Book with VisitorsCoverage" class="hover:text-accent" href="https://visitorscoverage.tp.st/kVEKww8v" onclick="trackAffiliateClick('VisitorsCoverage')">VisitorsCoverage</a></li>
+</ul>
+</div>
+<div>
+<h3 class="text-xl font-bold mb-4">Legal</h3>
+<ul class="space-y-2">
+<li><a aria-label="Privacy Policy" class="hover:text-accent" href="/privacy.html">Privacy Policy</a></li>
+<li><a aria-label="Affiliate Disclosure" class="hover:text-accent" href="/disclosure.html">Affiliate Disclosure</a></li>
+<li><a aria-label="Terms of Service" class="hover:text-accent" href="/terms.html">Terms of Service</a></li>
+<li><a aria-label="Contact" class="hover:text-accent" href="/contact.html">Contact</a></li>
+</ul>
+</div>
+</div>
+<div class="text-center py-6 text-sm">
+<p>© 2025 Travel4Fun. All rights reserved. Powered by <a aria-label="Travelpayouts" class="underline hover:text-accent" href="https://www.travelpayouts.com/?marker=609158">Travelpayouts</a>.</p>
+<p>Affiliate links used throughout. We may earn commissions at no extra cost to you. <a aria-label="Read affiliate disclosure" class="underline hover:text-accent" href="/disclosure.html">Read our full disclosure</a>.</p>
+</div>
+</footer>
+<script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Travel4Fun4U",
+      "url": "https://teusite.com",
+      "logo": "https://teusite.com/logo.png",
+      "sameAs": [
+        "https://www.youtube.com/@Travel4Fun4U",
+        "https://www.instagram.com/Travel4Fun4U"
+      ]
+    }
+    </script>
+<script>
+    const termos = ["roteiro de viagem", "explorar destinos", "guias turísticos", "melhores lugares para visitar"];
+    const body = document.body.innerHTML.toLowerCase();
+    termos.forEach(t => {
+        if (!body.includes(t)) {
+            document.body.innerHTML += `<span style="display:none">${t}</span>`;
+        }
+    });
+    </script>
+<script>
+    const links = {
+        "Tailândia": "/thailand.html",
+        "Itália": "/italy.html",
+        "Madeira": "/madeira.html"
+    };
+    document.querySelectorAll("p").forEach(p => {
+        let html = p.innerHTML;
+        Object.keys(links).forEach(term => {
+            const regex = new RegExp(`(${term})`, 'gi');
+            html = html.replace(regex, `<a href="${links[term]}">$1</a>`);
+        });
+        p.innerHTML = html;
+    });
+    </script>
+<!-- JSON-LD Schema -->
+
+<!-- Palavras-chave latentes -->
+
+<!-- Linkagem interna inteligente -->
+
+<!-- Google Analytics -->
+
+<!-- Microsoft Clarity -->
+<script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "abcdef123");
+    </script>
+<!-- Chatra Chatbot -->
+<script>
+    (function(d, w, c) {
+        w.ChatraID = 'Your-Chatra-ID';
+        var s = d.createElement('script');
+        w[c] = w[c] || function() {
+            (w[c].q = w[c].q || []).push(arguments);
+        };
+        s.async = true;
+        s.src = 'https://call.chatra.io/chatra.js';
+        if (d.head) d.head.appendChild(s);
+    })(document, window, 'Chatra');
+    </script>
+<script>
+    document.addEventListener('contextmenu', event => event.preventDefault());
+    document.onselectstart = () => false;
+    document.oncopy = () => false;
+    </script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Travel4Fun4U",
+  "url": "https://teusite.com",
+  "logo": "https://teusite.com/logo.png",
+  "sameAs": [
+    "https://www.youtube.com/@Travel4Fun4U",
+    "https://www.instagram.com/Travel4Fun4U"
+  ]
+}
+</script>
+
+<script>
+const links = {
+  "Thailand": "/thailand.html",
+  "Italy": "/italy.html",
+  "Madeira": "/madeira.html"
+};
+document.querySelectorAll("p").forEach(p => {
+  let html = p.innerHTML;
+  Object.keys(links).forEach(term => {
+    const regex = new RegExp(`\\b(${term})\\b`, 'gi');
+    html = html.replace(regex, `<a href="${links[term]}">$1</a>`);
+  });
+  p.innerHTML = html;
+});
+</script>
+</body>
+</html>
